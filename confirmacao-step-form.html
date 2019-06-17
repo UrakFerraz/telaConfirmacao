@@ -1,0 +1,844 @@
+<!doctype html>
+<html ⚡>
+  <head>
+    <meta charset="utf-8">
+    <title>Sample document</title>
+    <link rel="canonical" href="./regular-html-version.html">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <style amp-custom>
+		*{padding:0;margin:0;box-sizing:border-box;font-family:'Roboto Condensed',sans-serif}
+		html{position:relative;font-size:10px;scroll-behavior:smooth}
+		h1,h2,h3,h4,h5,p,span{font-size:110%;line-height:200%;text-align:center}
+		select,input,a{outline:none;position:relative;z-index:1}
+		select,a,.check-fim input{cursor:pointer}
+		body{font-family:sans-serif;overflow-x:hidden}
+		a,button{display:inline-block;text-decoration:none;color:#000;padding:10px;margin:20px;border:none;border-radius:5px;font-weight:700;font-size:120%;text-align:center;background-color:#fff;outline:none;cursor:pointer;box-shadow:0 0 20px 0 rgba(0,0,0,0.15)}
+		button:hover{cursor:pointer;background-color:#1f8a70;box-shadow:0 20px 50px 0 rgba(0,0,0,0.15);transition:all .5s;color:#26547c}
+		h1{font-size:150%;text-align:center}
+		span{display:block;font-size:130%;text-align:center}
+		p{display:inline-block;font-size:130%;width:100%;text-align:center}
+		.headerSpace{height:126px;background-color:#f2f2f2}
+		.header-container{position:relative;display:flex;height:80px;flex-direction:row;flex-wrap:nowrap;justify-content:space-between;align-items:center;margin:10px auto}
+		.steps-container{position:relative;display:flex;margin:10px auto;width:1000px;background-color:#666;border-radius:30px 30px 9px 9px;justify-content:center;height:100%;max-width:1300px}
+		.steps{position:relative;display:flex;flex-direction:row;flex-wrap:nowrap;justify-content:space-around;width:99%;padding:6px;max-width:1100px}
+		.steps-wrapper{position:relative;display:flex;align-items:center;justify-content:center;cursor:pointer}
+		.step-itens{position:relative;display:grid;padding:5px;width:100px;transition:1s all ease}
+		.borderStep{position:absolute;width:30px;height:30px;border:2px solid gray;border-radius:50%;transform:translateX(50%);right:50%;top:8px;z-index:20;transition:1s all ease}
+		.step-before-pass .borderStep{border:2px solid gray;transition:1s all ease}
+		.step-after-pass .borderStep{border:2px solid #505050;transition:1s all ease}
+		.step-select .borderStep{border:3px solid #fff;top:7.7px}
+		.step-number{justify-self:center;position:relative;width:30px;height:30px;font-size:18px;box-sizing:content-box}
+		.step-before span{position:relative;color:#fff;border-color:lightgray}
+		.stepLineBefore{position:absolute;align-self:center;justify-self:center;width:80px;height:4px;background:linear-gradient(to right,rgba(192,192,192,0) 0%,rgba(192,192,192,1) 40%,rgba(192,192,192,1) 100%);left:-44px;top:22px}
+		.stepLineAfter{position:absolute;align-self:center;justify-self:center;width:80px;height:4px;background:linear-gradient(to right,rgba(192,192,192,1) 0%,rgba(192,192,192,1) 40%,rgba(192,192,192,0) 100%);right:-44px;top:22px}
+		.step-after-pass .stepLineBefore{position:absolute;align-self:center;justify-self:center;width:80px;height:4px;background:linear-gradient(to right,rgba(80,80,80,0) 0%,rgba(80,80,80,1) 40%,rgba(80,80,80,1) 100%);left:-45px;top:22px}
+		.step-after-pass .stepLineAfter{position:absolute;align-self:center;justify-self:center;width:80px;height:4px;background:linear-gradient(to right,rgba(80,80,80,1) 0%,rgba(80,80,80,1) 40%,rgba(80,80,80,0) 100%);right:-45px;top:22px}
+		.step-select{position:relative;border-radius:5px;box-shadow:0 0 30px 0 rgba(0,0,0,0.6)}
+		.step-select span{position:relative;color:#fff}
+		.step-before-pass span{position:relative;color:#fff;border-color:lightgray}
+		.step-after span{position:relative}
+		.step-end span{position:relative}
+		.slidesContainer{position:relative;overflow:hidden;height:480px}
+		.slidesWrapper{scroll-snap-type:mandatory;scroll-snap-points-y:repeat(1000px);scroll-snap-type:x mandatory;position:relative;display:flex;overflow-x:scroll;margin:0 auto;width:90%;max-width:1200px;height:500px;border-radius:5px;overflow-y:hidden;scroll-behavior:smooth;scroll-snap-destination:50% 50%}
+		.slides{padding:10px 30px 30px;min-width:880px;height:390px;scroll-snap-align:center;position:relative;transition:1s all ease;position:relative;display:flex;scroll-snap-coordinate:50% 50%}
+		.titleSlides{position:relative;width:100%;scroll-snap-coordinate:50% 50%;scroll-snap-align:start}
+		#slide1{background-color:#fff}
+		#slidesArrowLeft,#slidesArrowRight{position:absolute;width:20px;bottom:200px;cursor:pointer}
+		#slidesArrowRight{right:0}
+		.title{background-color:#fff;height:100%;width:100%}
+		.titlePassos{position:relative;display:grid}
+		#titlePassoSvg{position:absolute;width:40px;height:40px;margin:10px}
+		.header span{font-weight:800;line-height:100%}
+		.header{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;justify-items:center;align-content:center;align-items:center;padding:10px;margin:20px 0;box-shadow:0 0 30px 0 rgba(0,0,0,0.10);border-radius:7px;background-color:#fff}
+		.header1{display:grid;grid-template-columns:1fr;grid-template-rows:auto;justify-items:center;align-content:center;align-items:center;margin:20px auto;padding:10px;box-shadow:0 0 30px 0 rgba(0,0,0,0.10);border-radius:7px;background-color:#fff}
+		.title{grid-column:1 / 3;grid-row:1 / 2;font-size:160%;line-height:140%}
+		.input-cliente{margin:20px auto;position:relative;display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;max-width:1024px}
+		.icone-input-release svg{height:40px;padding-right:10px;margin-top:5px}
+		.ampstart-input{background-color:#fff}
+		.release-dropdown{background-color:#fff;padding:10px 10px 10px 7px;margin-right:10px;border-radius:5px;border:none;width:420px;box-shadow:0 0 30px 0 rgba(0,0,0,0.10)}
+		.release-dropdown select option{text-align:left}
+		#releaseBtn{border:none;box-shadow:0 0 30px 0 rgba(0,0,0,0.10);background-color:#26547c;padding:15px 20px;color:#fff;transition:.3s all ease}
+		#releaseBtn:hover{box-shadow:0 15px 50px 0 rgba(0,0,0,0.10);background-color:#1f8a70;transform:scale(1.05)}
+		#releaseBtn:active{border:none;box-shadow:0 0 30px 0 rgba(0,0,0,0.10);background-color:#26547c;padding:15px 20px;color:#fff;transform:scale(1)}
+		.passosSlide1{padding:10px 0;border-radius:3px;font-weight:600;font-size:200%;color:#26547c;background-color:#fff;box-shadow:0 0 30px 0 rgba(0,0,0,0.10);border-radius:7px;font-family:'Roboto',sans-serif}
+		#assuntoReleaseSvg{position:relative;width:40px;left:4px}
+		#quantReleaseSvg{position:relative;width:40px}
+		.slide1ContinueBtn,.slide2ContinueBtn,.slide3ContinueBtn,.slide4ContinueBtn{position:absolute;display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;right:10px;bottom:-70px;background-color:#26547c;cursor:pointer;padding:10px 15px 10px 20px}
+		.btnsPasso1Container{position:absolute;display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;bottom:-70px;left:10px}
+		.slide1CopiaTesteBtn,.slide1PreviewReleaseBtn{position:relative;display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;background-color:#26547c;cursor:pointer;padding:10px 15px 10px 10px}
+		.slide3ContinueBtn{bottom:-90px}
+		.slide1ContinueBtn label,.slide2ContinueBtn label,.slide3ContinueBtn label,.slide4ContinueBtn label,.slide1CopiaTesteBtn label,.slide1PreviewReleaseBtn label{color:#fff;cursor:pointer}
+		#slidesArrowRightContinueBtn{height:20px;margin-left:10px}
+		#slide1CopiaTesteBtnSvg,#slide1PreviewReleaseBtnSvg{height:20px;margin-right:10px}
+		.slide1ContinueBtn:hover,.slide2ContinueBtn:hover,.slide3ContinueBtn:hover,.slide4ContinueBtn:hover{background-color:#1f8a70;box-shadow:0 10px 20px 0 rgba(0,0,0,0.15)}
+		.passo1MsgsContainer{position:absolute;display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;width:100%;height:100%;z-index:10}
+		.JanelaProcesando{width:300px;height:120px;background-color:#fff;position:absolute;display:flex;flex-direction:column;flex-wrap:nowrap;justify-content:center;align-items:center;box-shadow:0 10px 120px 0 rgba(0,0,0,0.3);border-radius:9px;padding:20px}
+		.JanelaProcesando span{font-size:16px}
+		.cxCheiaBox{position:absolute;display:grid;grid-template-rows:60px auto auto;grid-template-columns:40px 15vw 15vw 40px;background-color:#fff;box-shadow:0 15px 40px 0 rgba(0,0,0,0.20);border-radius:9px}
+		.cxCheiaBox span{grid-column:2 / 4;font-size:18px;width:300px;justify-self:center;align-self:center;line-height:1.3}
+		#alertMsgIcon{position:absolute;grid-column:1 / 2;width:40px;margin:9px}
+		#cxCheiaBoxSim{grid-column:2 / 3;background-color:#1f8a70;width:80px;justify-self:center;color:#fff}
+		#cxCheiaBoxNao{grid-column:3 / 4;background-color:#ff5100;width:80px;justify-self:center;color:#fff}
+		#cxCheiaBoxSim:hover{background-color:#0e4f2a}
+		#cxCheiaBoxNao:hover{background-color:#ca2332}
+		.lds-ellipsis{display:inline-block;position:relative;width:64px;height:64px;top:-12px}
+		.lds-ellipsis div{position:absolute;top:27px;width:11px;height:11px;border-radius:50%;background:#eee2df;animation-timing-function:cubic-bezier(0,1,1,0)}
+		.lds-ellipsis div:nth-child(1){left:6px;animation:lds-ellipsis1 .6s infinite}
+		.lds-ellipsis div:nth-child(2){left:6px;animation:lds-ellipsis2 .6s infinite}
+		.lds-ellipsis div:nth-child(3){left:26px;animation:lds-ellipsis2 .6s infinite}
+		.lds-ellipsis div:nth-child(4){left:45px;animation:lds-ellipsis3 .6s infinite}
+		@keyframes lds-ellipsis1 {
+		0%{transform:scale(0)}
+		100%{transform:scale(1)}
+		}
+		@keyframes lds-ellipsis3 {
+		0%{transform:scale(1)}
+		100%{transform:scale(0)}
+		}
+		@keyframes lds-ellipsis2 {
+		0%{transform:translate(0,0)}
+		100%{transform:translate(19px,0)}
+		}
+		.contato,{padding:30px;border:.5px solid #e2e2e2;background-color:#fff;box-shadow:0 0 30px 0 rgba(0,0,0,0.10);border-radius:7px}
+		#checkSenderSvg{position:absolute;width:40px;left:25px}
+		.passosSlide2{padding:10px 0;margin-bottom:20px;border-radius:3px;font-weight:600;font-size:200%;color:#26547c;background-color:#fff;box-shadow:0 0 30px 0 rgba(0,0,0,0.10);border-radius:7px;font-family:'Roboto',sans-serif}
+		.mudar{margin:0 auto}
+		.mudar h2{padding-bottom:5px}
+		.mudar button{display:block;margin:0 auto;width:120px;margin-top:20px;font-size:130%}
+		.mudar input{display:block;margin:0 auto;padding:15px;border:2px solid lightgray}
+		.select-contato{position:relative;width:100%;box-shadow:0 0 30px 0 rgba(0,0,0,0.10);border-radius:5px;padding:10px}
+		.select-contato h2{padding:10px 0}
+		.nome-contato{position:relative;width:100%;border-radius:5px;padding:10px;box-shadow:0 0 30px 0 rgba(0,0,0,0.10)}
+		.nome-contato span{font-size:200%;color:#31AF91}
+		.nome-contato a{padding:16px 30px;margin:20px;font-size:120%}
+		.lista-remetente{display:block;margin:20px auto;width:300px;text-align:center;padding:10px;background-color:#fff;padding:10px;border-radius:5px;border:none;box-shadow:0 0 30px 0 rgba(0,0,0,0.10)}
+		#slide3{padding:10px 30px 30px;min-width:880px;height:390px;scroll-snap-align:start;position:relative;transition:1s all ease;position:relative;display:flex;scroll-snap-coordinate:50% 50%}
+		.passosSlide3{padding:10px 0;margin-bottom:20px;border-radius:3px;font-weight:600;font-size:200%;color:#26547c;background-color:#fff;box-shadow:0 0 30px 0 rgba(0,0,0,0.10);border-radius:7px;font-family:'Roboto',sans-serif}
+		.grid-2fr-passo1{display:grid;position:relative;grid-template-columns:20px 1fr 1fr 1fr 20px;grid-template-rows:60px;justify-items:center;align-items:flex-end;box-shadow:0 0 30px 0 rgba(0,0,0,0.10);border-radius:7px}
+		.grid-2fr-passo1 h1{grid-column:2 / 3;position:relative;bottom:13px}
+		.but-imed{grid-column:3 / 4;margin:0 auto;width:200px;font-size:12px;height:50px}
+		.but-agendar{grid-column:4 / 5;margin:0 auto;width:200px;font-size:120%;height:50px;display:flex;position:relative;flex-direction:column;flex-wrap:nowrap;justify-content:center;align-items:center}
+		#textAgendar{font-size:12px}
+		#agendadoText{display:none;position:absolute;font-size:12px;top:2px}
+		#but-imed{text-decoration:none;background-color:#1f8a70;color:#fff}
+		#but-agendar{background-color:#26547c;color:#fff}
+		.envio-but1,.envio-but2{position:relative;bottom:5px}
+		#svg-check21{display:block}
+		#svg-check22{display:none}
+		.ai{margin-top:20px;padding:10px;background-color:#fff;box-shadow:0 0 30px 0 rgba(0,0,0,0.10);border-radius:7px}
+		.grid-3fr{position:relative;display:grid;grid-template-columns:repeat(3,1fr);align-items:flex-start}
+		.ai-title{position:relative;margin:0 10px 2px;font-size:110%;border:1px solid lightgray;border-radius:5px}
+		.ai-title h2,.grid-3fr h3{text-transform:uppercase;line-height:100%;margin-top:4px}
+		.ai-title p{margin:0 auto;font-size:90%;color:gray}
+		.grid-3fr button{display:inline-block;text-decoration:none;color:#fff;padding:10px;margin:10px;border:1px solid lightgray;border-radius:5px;font-weight:300;font-size:10px;text-align:center;background-color:#26547c;position:relative}
+		.but-ai-1-text h3,.but-ai-2-text h3,.but-ai-3-text h3{font-size:110%;position:relative;margin-bottom:10px}
+		.but-ai-1-text p,.but-ai-2-text p,.but-ai-3-text p{font-size:106%;font-weight:400;color:#fff;line-height:120%;text-align:justify}
+		#robotSvg{position:absolute;width:25px;margin:3px}
+		#rocketSvg{position:absolute;width:25px;margin:3px;top:0}
+		#rabbitSvg{position:absolute;width:32px;margin:3px;top:0}
+		.datePicker{z-index:100;position:absolute;background-color:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;width:100%;height:100%}
+		#static-picker{position:absolute;display:flex;left:50%;top:50%;transform:translate(-50%,-50%);box-shadow:0 20px 40px 0 rgba(0,0,0,0.20)}
+		.CalendarDay__selected{background-color:#eee2df;color:#26547c;border:none}
+		#static-picker button{border:none;border-radius:0;box-shadow:none;margin:0;padding:0}
+		.DayPickerKeyboardShortcuts_buttonReset{display:none}
+		.CalendarMonth_caption{background-color:#eee2df;color:#26547c}
+		.but-agendar input{background-color:transparent;border:none;font-weight:700;color:#fff;position:absolute;display:none;margin:0 auto;text-align:center;bottom:6px;font-size:18px;font-family:'Roboto',sans-serif}
+		.passosSlide4{padding:10px 0;border-radius:3px;font-weight:600;font-size:200%;color:#26547c;background-color:#fff;box-shadow:0 0 30px 0 rgba(0,0,0,0.10);border-radius:7px;font-family:'Roboto',sans-serif}
+		.envio{position:relative;display:flex;flex-direction:column;justify-content:space-between}
+		#stopWatchSvg{position:relative;width:40px;color:gray;font-size:120%;justify-self:center;align-self:center;margin:10px}
+		.svg-checkTime{position:absolute;z-index:2;display:block;left:-6px;top:-8px;width:30px;height:30px;-webkit-filter:drop-shadow(5px 5px 5px rgba(0,0,0,0.30));filter:drop-shadow(5px 5px 5px rgba(0,0,0,0.30))}
+		#svg-checkTime{display:block}
+		.check-fim-container{display:grid;justify-content:center;align-items:center;padding-top:10px;margin:0 auto;width:90%}
+		.check-fim{display:grid;grid-template-columns:repeat(7,1fr);justify-items:center;justify-content:center;grid-gap:15px}
+		.check1,.check2,.check3,.check4,.check5,.check6,.check7{margin:7px;width:80px;border-radius:5px;position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;cursor:pointer;background-color:#26547c}
+		.check7{background-color:#1f8a70}
+		.check1 label,.check2 label,.check3 label,.check4 label,.check5 label,.check6 label,.check7 label{text-align:center;display:block;font-size:140%;font-weight:600;padding-bottom:10px;color:#fff;font-weight:500}
+		.check1:hover,.check2:hover,.check3:hover,.check4:hover,.check5:hover,.check6:hover,.check7:hover{box-shadow:0 20px 50px 0 rgba(0,0,0,0.15);transform:scale(1.1);transition:all .5s ease}
+		#Btn4hrs,#Btn6hrs,#Btn8hrs,#Btn12hrs,#Btn18hrs,#Btn24hrs{display:none}
+		.stop{margin:20px 0;padding:15px;background-color:#fff;box-shadow:0 0 30px 0 rgba(0,0,0,0.10);border-radius:7px;line-height:120%}
+		.passosSlide5{padding:10px 0;border-radius:3px;font-weight:600;font-size:200%;color:#26547c;background-color:#fff;box-shadow:0 0 30px 0 rgba(0,0,0,0.10);border-radius:7px;font-family:'Roboto',sans-serif}
+		.but-enviar{border:#000;display:block;margin:0 auto;background-color:#ca2332;color:#fff;width:200px;margin-top:20px;font-size:200%;transition:.5s ease all}
+		.but-enviar:hover,.mudar-btn:hover{background-color:#1f8a70;color:#26547c}
+		#recibo{position:relative;display:grid;grid-template-columns:repeat(3,1fr);background-color:#fff;box-shadow:0 0 30px 0 rgba(0,0,0,0.10);border-radius:7px;margin-top:20px;justify-content:end;align-items:center}
+		#recibo span{position:relative;line-height:120%}
+		#reciboTitle{grid-column:1 / 4;font-weight:700;margin:10px 0;font-size:16px;font-family:'Roboto',sans-serif;text-align:center;left:0}
+		#reciboSubtitle,#reciboData,#reciboData1{text-align:left;left:80px}
+		#reciboSubtitle{font-weight:700;color:#26547c}
+		.reciboBloco{position:relative;padding:5px}
+		.reciboBlocoFull{grid-column:3 / 4}
+		#reciboData{margin-bottom:10px}
+		.reciboSvgIcon{height:40px;position:absolute;left:30px}
+		#reciboReleaseSvg{left:45px}
+		#reciboTimeSvg{left:35px}
+		.reciboText{margin:20px auto;width:100%;color:gray;font-size:120%;justify-self:center;align-self:center;grid-column:1 / 4}
+		.gerarPdfBtn{position:absolute;display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;bottom:0;color:#26547c}
+		#pdfFileSvg{width:20px;margin-right:5px}
+		.enviarConfirmarModal{position:absolute;display:none;justify-content:center;align-items:center;left:50%;top:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(238,226,223,1) 0%,rgba(255,255,255,.4) 46%);width:100%;height:100%}
+		.ConfirmarBox{position:relative;display:grid;grid-template-rows:50px auto auto;grid-template-columns:40px 11vw 11vw 40px;background-color:#fff;box-shadow:0 15px 40px 0 rgba(0,0,0,0.20);border-radius:9px}
+		.ConfirmarBox span{grid-column:2 / 4;font-size:18px;justify-self:center;align-self:center}
+		#alertMsgIcon{position:absolute;grid-column:1 / 2;width:40px;margin:9px}
+		#ConfirmarBoxSim{grid-column:2 / 3;background-color:#1f8a70;color:#fff}
+		#ConfirmarBoxNao{grid-column:3 / 4;background-color:#ff5100;color:#fff}
+		#ConfirmarBoxSim:hover{background-color:#0e4f2a}
+		#ConfirmarBoxNao:hover{background-color:#ca2332}
+		.finalConfirmModal{position:absolute;display:none;justify-content:center;align-items:center;left:50%;top:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(238,226,223,1) 0%,rgba(255,255,255,.4) 46%);width:100%;height:100%}
+		.finalConfirmBox{display:none;justify-content:center;flex-direction:column;align-items:center;background-color:#fff;padding:40px;box-shadow:0 10px 50px 0 rgba(0,0,0,0.10);border-radius:7px;animation-duration:2s}
+		#finalConfirmSvg{width:120px}
+		#finalConfirmText{font-size:20px;margin-top:16px;font-weight:300}
+		@-webkit-keyframes bounceInDown {
+		from,60%,75%,90%,to{-webkit-animation-timing-function:cubic-bezier(0.215,0.61,0.355,1);animation-timing-function:cubic-bezier(0.215,0.61,0.355,1)}
+		0%{opacity:0;-webkit-transform:translate3d(0,-3000px,0);transform:translate3d(0,-3000px,0)}
+		60%{opacity:1;-webkit-transform:translate3d(0,25px,0);transform:translate3d(0,25px,0)}
+		75%{-webkit-transform:translate3d(0,-10px,0);transform:translate3d(0,-10px,0)}
+		90%{-webkit-transform:translate3d(0,5px,0);transform:translate3d(0,5px,0)}
+		to{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}
+		}
+		@keyframes bounceInDown {
+		from,60%,75%,90%,to{-webkit-animation-timing-function:cubic-bezier(0.215,0.61,0.355,1);animation-timing-function:cubic-bezier(0.215,0.61,0.355,1)}
+		0%{opacity:0;-webkit-transform:translate3d(0,-3000px,0);transform:translate3d(0,-3000px,0)}
+		60%{opacity:1;-webkit-transform:translate3d(0,25px,0);transform:translate3d(0,25px,0)}
+		75%{-webkit-transform:translate3d(0,-10px,0);transform:translate3d(0,-10px,0)}
+		90%{-webkit-transform:translate3d(0,5px,0);transform:translate3d(0,5px,0)}
+		to{-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}
+		}
+		.bounceInDown{-webkit-animation-name:bounceInDown;animation-name:bounceInDown}
+		.svg-check21{position:relative;z-index:2;display:block;right:20px;bottom:-30px;width:30px;height:30px;-webkit-filter:drop-shadow(5px 5px 5px rgba(0,0,0,0.30));filter:drop-shadow(5px 5px 5px rgba(0,0,0,0.30))}
+		.svg-check22{position:relative;z-index:2;display:block;right:20px;bottom:-30px;width:30px;height:30px;-webkit-filter:drop-shadow(5px 5px 5px rgba(0,0,0,0.30));filter:drop-shadow(5px 5px 5px rgba(0,0,0,0.30))}
+		.svg-check31{position:absolute;display:block;margin:0 auto;width:30px;height:30px;top:-7px;left:-5px;-webkit-filter:drop-shadow(5px 5px 5px rgba(0,0,0,0.30));filter:drop-shadow(5px 5px 5px rgba(0,0,0,0.30))}
+		.svg-check32{position:absolute;display:block;margin:0 auto;width:30px;height:30px;top:-7px;left:-5px;-webkit-filter:drop-shadow(5px 5px 5px rgba(0,0,0,0.30));filter:drop-shadow(5px 5px 5px rgba(0,0,0,0.30))}
+		.svg-check33{position:absolute;display:block;margin:0 auto;width:30px;height:30px;top:-7px;left:-5px;-webkit-filter:drop-shadow(5px 5px 5px rgba(0,0,0,0.30));filter:drop-shadow(5px 5px 5px rgba(0,0,0,0.30))}
+		.container{display:grid;grid-template-columns:95%;grid-template-rows:repeat(6,auto);justify-content:center}
+		.infos span{font-size:170%}
+		.logo{grid-column:1 / 2;grid-row:1 / 2;width:200px;padding:19px 5px 5px 10px}
+		.passos{padding:30px 0;border-radius:3px;font-weight:600;font-size:200%;color:#26547c;background-color:#fff;box-shadow:0 0 30px 0 rgba(0,0,0,0.10);border-radius:7px}
+		.grid-2fr-passo2{position:relative;display:grid;grid-template-columns:repeat(2,1fr);justify-items:center;grid-column-gap:15px}
+		#svg-check31{display:none}
+		#svg-check32{display:block}
+		#svg-check33{display:none}
+		#but-ai-2{background-color:#1f8a70}
+		.infos{padding:30px;margin:30px;border:.5px solid #e2e2e2;background-color:#fff;box-shadow:0 0 30px 0 rgba(0,0,0,0.10);border-radius:7px}
+		.but-parar{display:block;margin:0 auto;background-color:#fff;color:#000;width:300px;margin-top:30px;font-size:130%}
+		.fullContainer {
+			display: block;
+			margin: 0 auto;
+			width: 1024px;
+		}
+    </style>
+
+
+    <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
+    <script async custom-element="amp-date-picker" src="https://cdn.ampproject.org/v0/amp-date-picker-0.1.js"></script>
+    <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+    <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
+    <script async custom-element="amp-lightbox" src="https://cdn.ampproject.org/v0/amp-lightbox-0.1.js"></script>
+    <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+
+    <script async custom-element="amp-fx-collection" src="https://cdn.ampproject.org/v0/amp-fx-collection-0.1.js"></script>
+
+    <!-- <link rel="stylesheet" href="index.css"> -->
+
+        <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+  </head>
+
+<body>
+
+<!-- header space -->
+<div class="headerSpace"></div>
+<!-- header space -->
+
+<div class="fullContainer">
+	<div class="StepFormWrapper">
+		<div class="header-container">
+			<div class="steps-container">
+				<div class="steps">
+					<div class="steps-wrapper" id="passo1">
+						<div class="step-itens step-select">
+							<div class="borderStep borderStepPass borderStepSelect"></div>
+							<span class="step-number">1</span>
+							<span class="step-title">RELEASE</span>
+							<div class="stepLineAfter"></div>
+						</div>
+					</div>
+					<div class="steps-wrapper" id="passo2">
+						<div class="step-itens step-after-pass">
+							<div class="stepLineBefore"></div>
+							<div class="borderStep"></div>
+							<span class="step-number">2</span>
+							<span class="step-title">REMETENTE</span>
+							<div class="stepLineAfter"></div>
+						</div>
+					</div>
+					<div class="steps-wrapper" id="passo3">
+						<div class="step-itens step-after-pass">
+							<div class="stepLineBefore"></div>
+							<div class="borderStep"></div>
+							<span class="step-number">3</span>
+							<span class="step-title">MODO DE ENVIO</span>
+							<div class="stepLineAfter"></div>
+						</div>
+					</div>
+					<div class="steps-wrapper" id="passo4">
+						<div class="step-itens step-after-pass">
+							<div class="stepLineBefore"></div>
+							<div class="borderStep"></div>
+							<span class="step-number">4</span>
+							<span class="step-title">ENTREGA</span>
+							<div class="stepLineAfter"></div>
+						</div>
+					</div>
+					<div class="steps-wrapper" id="passo5">
+						<div class="step-itens step-after-pass">
+							<div class="stepLineBefore"></div>
+							<div class="borderStep"></div>
+							<span class="step-number">5</span>
+							<span class="step-title">CONFIRMAR</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- início div container -->
+	<div class="container">
+
+<div class="slidesContainer">
+
+<div class="slidesWrapper">
+	<div class="slides" id="slide1">
+		<div class="titleSlides" id="SlideRefOne">
+			<div class="titlePassos">
+				<svg id="titlePassoSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+					<path fill="#eee2df" d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 464c-118.664 0-216-96.055-216-216 0-118.663 96.055-216 216-216 118.664 0 216 96.055 216 216 0 118.663-96.055 216-216 216zm141.63-274.961L217.15 376.071c-4.705 4.667-12.303 4.637-16.97-.068l-85.878-86.572c-4.667-4.705-4.637-12.303.068-16.97l8.52-8.451c4.705-4.667 12.303-4.637 16.97.068l68.976 69.533 163.441-162.13c4.705-4.667 12.303-4.637 16.97.068l8.451 8.52c4.668 4.705 4.637 12.303-.068 16.97z"/>
+				</svg>
+				<h1 class="passosSlide1">PASSO 1: SELECIONAR O RELEASE</h1>
+			</div>
+			<div class="header">
+				<h1 class="title">Confirmação de envio</h1>
+				<p><span>
+					<svg id="assuntoReleaseSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+						<path fill="#eee2df" d="M560.83 135.96l-24.79-24.79c-20.23-20.24-53-20.26-73.26 0L384 189.72v-57.75c0-12.7-5.1-25-14.1-33.99L286.02 14.1c-9-9-21.2-14.1-33.89-14.1H47.99C21.5.1 0 21.6 0 48.09v415.92C0 490.5 21.5 512 47.99 512h288.02c26.49 0 47.99-21.5 47.99-47.99v-80.54c6.29-4.68 12.62-9.35 18.18-14.95l158.64-159.3c9.79-9.78 15.17-22.79 15.17-36.63s-5.38-26.84-15.16-36.63zM256.03 32.59c2.8.7 5.3 2.1 7.4 4.2l83.88 83.88c2.1 2.1 3.5 4.6 4.2 7.4h-95.48V32.59zm95.98 431.42c0 8.8-7.2 16-16 16H47.99c-8.8 0-16-7.2-16-16V48.09c0-8.8 7.2-16.09 16-16.09h176.04v104.07c0 13.3 10.7 23.93 24 23.93h103.98v61.53l-48.51 48.24c-30.14 29.96-47.42 71.51-47.47 114-3.93-.29-7.47-2.42-9.36-6.27-11.97-23.86-46.25-30.34-66-14.17l-13.88-41.62c-3.28-9.81-12.44-16.41-22.78-16.41s-19.5 6.59-22.78 16.41L103 376.36c-1.5 4.58-5.78 7.64-10.59 7.64H80c-8.84 0-16 7.16-16 16s7.16 16 16 16h12.41c18.62 0 35.09-11.88 40.97-29.53L144 354.58l16.81 50.48c4.54 13.51 23.14 14.83 29.5 2.08l7.66-15.33c4.01-8.07 15.8-8.59 20.22.34C225.44 406.61 239.9 415.7 256 416h32c22.05-.01 43.95-4.9 64.01-13.6v61.61zm27.48-118.05A129.012 129.012 0 0 1 288 384v-.03c0-34.35 13.7-67.29 38.06-91.51l120.55-119.87 52.8 52.8-119.92 120.57zM538.2 186.6l-21.19 21.19-52.8-52.8 21.2-21.19c7.73-7.73 20.27-7.74 28.01 0l24.79 24.79c7.72 7.73 7.72 20.27-.01 28.01z"/>
+					</svg>
+				</span>
+				Assunto do release:
+				<span>ASSUNTO</span>
+				<p><span>
+					<svg id="quantReleaseSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+						<path fill="#eee2df" d="M560.8 329.8l-94.6-88.7c-2.4-2.3-6.2-2.1-8.5.3L444.1 256c-2.3 2.4-2.1 6.2.3 8.5l59.3 55.6H388.2l-32 64H219.8l-32-64H72.4l59.3-55.6c2.4-2.3 2.5-6.1.3-8.5l-13.7-14.6c-2.3-2.4-6.1-2.5-8.5-.3l-94.6 88.7C5.5 338.9 0 351.5 0 364.8V464c0 26.5 21.5 48 48 48h480c26.5 0 48-21.5 48-48v-99.2c0-13.3-5.5-25.9-15.2-35zM544 464c0 8.8-7.2 16-16 16H48c-8.8 0-16-7.2-16-16v-96c0-8.8 7.2-16 16-16h120l32 64h176l32-64h120c8.8 0 16 7.2 16 16v96zM160 192h64v104c0 13.2 10.8 24 24 24h80c13.2 0 24-10.8 24-24V192h64c28.4 0 42.8-34.5 22.6-54.6l-128-128c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-20 20.1-5.8 54.6 22.7 54.6zM288 32l128 128h-96v128h-64V160h-96L288 32z"/>
+					</svg>
+				</span>Total de e-mails selecionados: <span>999999</span></p>
+			</div>
+			<div class="header1">
+				<!-- menu release Select -->
+				<div class="input-cliente">
+				  <div class="icone-input-release">
+					<svg id="ReleaseIcon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 491.695 491.695" style="enable-background:new 0 0 491.695 491.695;" xml:space="preserve">
+						<path fill="#eee2df" d="M436.714,0H149.471c-16.438,0-29.812,13.374-29.812,29.812v66.714c-54.49,15.594-94.489,65.857-94.489,125.288c0,59.431,39.998,109.694,94.489,125.288v114.783c0,16.438,13.374,29.812,29.812,29.812h234.733c2.785,0,5.455-1.106,7.425-3.075l71.821-71.822c1.969-1.969,3.075-4.64,3.075-7.425V29.812C466.525,13.374,453.152,0,436.714,0z M149.471,21h287.243c4.858,0,8.811,3.953,8.811,8.812v31.689H140.659V29.812C140.659,24.953,144.612,21,149.471,21z M46.17,221.813c0-60.263,49.027-109.29,109.29-109.29c60.263,0,109.29,49.027,109.29,109.29s-49.027,109.291-109.29,109.291C95.197,331.104,46.17,282.076,46.17,221.813z M140.659,461.884V351.258c4.86,0.552,9.797,0.846,14.802,0.846c39.135,0,74.292-17.347,98.195-44.752h64.336c5.799,0,10.5-4.701,10.5-10.5s-4.701-10.5-10.5-10.5h-49.381c9.133-15.95,14.984-34.005,16.644-53.242h32.736c5.799,0,10.5-4.701,10.5-10.5c0-5.799-4.701-10.5-10.5-10.5h-32.603c-1.42-19.194-7.02-37.242-15.886-53.241h48.488c5.799,0,10.5-4.701,10.5-10.5c0-5.799-4.701-10.5-10.5-10.5h-62.974c-23.918-28.323-59.67-46.347-99.558-46.347c-5.005,0-9.942,0.294-14.802,0.846v-9.867h304.866v316.372h-42.009c-16.439,0-29.811,13.374-29.811,29.811v42.011H149.471C144.612,470.695,140.659,466.743,140.659,461.884z M394.705,455.845v-27.16c0-4.859,3.953-8.811,8.811-8.811h27.16L394.705,455.845z"/>
+						<path fill="#eee2df" d="M359.246,158.869h34.87c5.799,0,10.5-4.701,10.5-10.5c0-5.799-4.701-10.5-10.5-10.5h-34.87c-5.799,0-10.5,4.701-10.5,10.5C348.746,154.168,353.447,158.869,359.246,158.869z"/>
+						<path fill="#eee2df" d="M359.246,233.11h34.87c5.799,0,10.5-4.701,10.5-10.5c0-5.799-4.701-10.5-10.5-10.5h-34.87c-5.799,0-10.5,4.701-10.5,10.5C348.746,228.409,353.447,233.11,359.246,233.11z"/>
+						<path fill="#eee2df" d="M359.246,307.352h34.87c5.799,0,10.5-4.701,10.5-10.5s-4.701-10.5-10.5-10.5h-34.87c-5.799,0-10.5,4.701-10.5,10.5S353.447,307.352,359.246,307.352z"/>
+						<path fill="#eee2df" d="M394.116,381.593c5.799,0,10.5-4.701,10.5-10.5s-4.701-10.5-10.5-10.5h-98.225c-5.799,0-10.5,4.701-10.5,10.5s4.701,10.5,10.5,10.5H394.116z"/>
+						<path fill="#eee2df" d="M236.982,168.845l-12.81-12.81c-3.45-3.449-8.036-5.349-12.915-5.349s-9.465,1.9-12.915,5.349l-67.19,67.19l-18.573-18.573c-3.449-3.448-8.036-5.348-12.914-5.348c-4.878,0-9.465,1.9-12.914,5.349l-12.813,12.812c-7.12,7.121-7.12,18.708,0.001,25.829l44.297,44.296c3.45,3.451,8.037,5.351,12.916,5.351c0,0,0.001,0,0.001,0c4.878,0,9.465-1.9,12.913-5.349l92.917-92.917C244.103,187.554,244.103,175.966,236.982,168.845z M131.151,270.807l-40.429-40.428l8.942-8.942l24.062,24.062c4.101,4.101,10.749,4.101,14.85,0l72.681-72.681l8.942,8.942L131.151,270.807z"/>
+					</svg>
+				  </div>
+
+				  <div class="ampstart-input">
+				    <select name="name12" id="ip12" class="release-dropdown" onchange="getSelectedValue();">
+				      <option value="">Selecione o release</option>
+				      <option value="opt1">Nome Release 1</option>
+				      <option value="opt2">Nome Release 2</option>
+				      <option value="opt3">Nome Release 3</option>
+				    </select>
+				  </div>
+				  <button id="releaseBtn">Selecionar e continuar</button>
+				</div>
+				<!-- End menu Release Select -->
+			</div>
+		</div>
+			<button class="slide1ContinueBtn" id="slide1ContinueBtn">
+				<label for="slide1ContinueBtn">CONTINUE</label>
+				<svg id="slidesArrowRightContinueBtn" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 9.8 17" xml:space="preserve">
+					<path fill="#eee2df" d="M9.6,9l-7.8,7.7c-0.4,0.4-0.8,0.4-1.1,0l-0.5-0.5c-0.4-0.4-0.4-0.8,0-1.1L7,8.4L0.3,1.8
+					c-0.4-0.4-0.4-0.8,0-1.1l0.5-0.5c0.4-0.4,0.8-0.4,1.1,0l7.8,7.6C9.9,8.2,9.9,8.7,9.6,9z"/>
+				</svg>
+			</button>
+
+			<div class="btnsPasso1Container">
+			<button class="slide1PreviewReleaseBtn" id="slide1PreviewReleaseBtn">
+				<svg  id="slide1PreviewReleaseBtnSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+					<path fill="#eee2df" d="M569.354 231.631C512.969 135.948 407.808 72 288 72 168.14 72 63.004 135.994 6.646 231.63a47.999 47.999 0 0 0 0 48.739C63.032 376.053 168.192 440 288 440c119.86 0 224.996-63.994 281.354-159.631a48.002 48.002 0 0 0 0-48.738zM416 228c0 68.483-57.308 124-128 124s-128-55.517-128-124 57.308-124 128-124 128 55.517 128 124zm125.784 36.123C489.837 352.277 393.865 408 288 408c-106.291 0-202.061-56.105-253.784-143.876a16.006 16.006 0 0 1 0-16.247c29.072-49.333 73.341-90.435 127.66-115.887C140.845 158.191 128 191.568 128 228c0 85.818 71.221 156 160 156 88.77 0 160-70.178 160-156 0-36.411-12.833-69.794-33.875-96.01 53.76 25.189 98.274 66.021 127.66 115.887a16.006 16.006 0 0 1-.001 16.246zM224 224c0-10.897 2.727-21.156 7.53-30.137v.02c0 14.554 11.799 26.353 26.353 26.353 14.554 0 26.353-11.799 26.353-26.353s-11.799-26.353-26.353-26.353h-.02c8.981-4.803 19.24-7.53 30.137-7.53 35.346 0 64 28.654 64 64s-28.654 64-64 64-64-28.654-64-64z"/>
+				</svg>
+				<label for="slide1PreviewReleaseBtn">PREVIEW DO RELEASE</label>
+			</button>
+			<button class="slide1CopiaTesteBtn" id="slide1CopiaTesteBtn">
+				<svg  id="slide1CopiaTesteBtnSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+					<path fill="#eee2df" d="M566.633 169.37L406.63 9.392C386.626-10.612 352 3.395 352 32.022v72.538C210.132 108.474 88 143.455 88 286.3c0 84.74 49.78 133.742 79.45 155.462 24.196 17.695 58.033-4.917 49.7-34.51C188.286 304.843 225.497 284.074 352 280.54V352c0 28.655 34.654 42.606 54.63 22.63l160.003-160c12.489-12.5 12.489-32.76 0-45.26zM384 352V248.04c-141.718.777-240.762 15.03-197.65 167.96C154.91 393 120 351.28 120 286.3c0-134.037 131.645-149.387 264-150.26V32l160 160-160 160zm37.095 52.186c2.216-1.582 4.298-3.323 6.735-5.584 7.68-7.128 20.17-1.692 20.17 8.787V464c0 26.51-21.49 48-48 48H48c-26.51 0-48-21.49-48-48V112c0-26.51 21.49-48 48-48h172.146c6.612 0 11.954 5.412 11.852 12.04-.084 5.446-4.045 10.087-9.331 11.396-9.462 2.343-18.465 4.974-27.074 7.914-1.25.427-2.555.65-3.876.65H48c-8.837 0-16 7.163-16 16v352c0 8.837 7.163 16 16 16h352c8.837 0 16-7.163 16-16v-50.002c0-3.905 1.916-7.543 5.095-9.812z"/>
+				</svg>
+				<label for="slide1CopiaTesteBtn">ENVIAR CÓPIA TESTE</label>
+			</button>
+			</div>
+
+
+<div class="passo1MsgsContainer">
+	<div class="JanelaProcesando">
+		<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+		<span>Processando, aguarde um momento...</span>
+	</div>
+
+
+	<div class="cxCheiaBox">
+	    <svg id="alertMsgIcon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 44.2 38.7" xml:space="preserve">
+	      <path fill="#eee2df" d="M22.1,2.8C11.4,2.8,2.8,9.6,2.8,17.9s8.7,15.2,19.3,15.2c2.4,0,4.9-0.4,7.2-1.1l1.3-0.4l1.1,0.8c2,1.4,5,3,8.9,3.4c-1-1.3-2.6-3.5-3.5-6l-0.6-1.6l1.2-1.3c2.5-2.6,3.8-5.8,3.8-9C41.4,9.6,32.7,2.8,22.1,2.8 M22.1,0c12.2,0,22.1,8,22.1,17.9c0,4.1-1.7,7.9-4.6,10.9c1.3,3.4,4,6.3,4,6.3c0.6,0.6,0.7,1.5,0.4,2.2c-0.3,0.8-1.1,1.3-1.9,1.3c-5.3,0-9.5-2.2-12-4c-2.5,0.8-5.2,1.2-8,1.2C9.9,35.9,0,27.9,0,17.9S9.9,0,22.1,0z"/>
+	      <path fill="#eee2df" d="M19.1,27.1c0-0.8,0.3-1.4,0.8-1.9c0.6-0.5,1.3-0.7,2.1-0.7c0.8,0,1.5,0.2,2.1,0.7c0.6,0.5,0.8,1.1,0.8,1.9c0,0.8-0.3,1.4-0.8,1.9c-0.6,0.5-1.3,0.7-2.1,0.7c-0.8,0-1.5-0.2-2.1-0.7C19.4,28.5,19.1,27.8,19.1,27.1z M24.3,22.2H20L19.3,6.5H25L24.3,22.2z"/>
+	    </svg>
+		<span>Este mailing possui x% de caixas cheias. Gostaria de eliminá-las?</span>
+		<button id="cxCheiaBoxSim">SIM</button>
+		<button id="cxCheiaBoxNao">NÃO</button>
+	</div>
+
+
+</div>
+
+
+	</div>
+	<div class="slides" id="slide2">
+		<div class="titleSlides" id="SlideRefTwo">
+			<div class="titlePassos">
+				<svg id="titlePassoSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+					<path fill="#eee2df" d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 464c-118.664 0-216-96.055-216-216 0-118.663 96.055-216 216-216 118.664 0 216 96.055 216 216 0 118.663-96.055 216-216 216zm141.63-274.961L217.15 376.071c-4.705 4.667-12.303 4.637-16.97-.068l-85.878-86.572c-4.667-4.705-4.637-12.303.068-16.97l8.52-8.451c4.705-4.667 12.303-4.637 16.97.068l68.976 69.533 163.441-162.13c4.705-4.667 12.303-4.637 16.97.068l8.451 8.52c4.668 4.705 4.637 12.303-.068 16.97z"/>
+				</svg>
+				<h1 class="passosSlide2">PASSO 2: CONFIRMAR O REMETENTE</h1>
+			</div>
+			<div class="contato">
+				<div class="grid-2fr-passo2">
+					<div class="select-contato">
+					<svg id="checkSenderSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+						<path fill="#eee2df" d="M413.505 91.951L133.49 371.966l-98.995-98.995c-4.686-4.686-12.284-4.686-16.971 0L6.211 284.284c-4.686 4.686-4.686 12.284 0 16.971l118.794 118.794c4.686 4.686 12.284 4.686 16.971 0l299.813-299.813c4.686-4.686 4.686-12.284 0-16.971l-11.314-11.314c-4.686-4.686-12.284-4.686-16.97 0z"/>
+					</svg>
+						<h1>2.1 Confirme o e-mail do remetente:</h1>
+						<h2>O endereço de e-mail que aparecerá<br>nas caixas de entrada e que receberá as respostas:</h2>
+						<select class="lista-remetente" name="email-remetente">
+						  <option value="remetente1">remetente1@email.com</option>
+						  <option value="remetente2">remetente2@email.com</option>
+						  <option value="remetente3">remetente3@email.com</option>
+						  <option value="remetente4">remetente4@email.com</option>
+						</select>
+					</div>
+					<div class="nome-contato">
+						<svg id="checkSenderSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+							<path fill="#eee2df" d="M413.505 91.951L133.49 371.966l-98.995-98.995c-4.686-4.686-12.284-4.686-16.971 0L6.211 284.284c-4.686 4.686-4.686 12.284 0 16.971l118.794 118.794c4.686 4.686 12.284 4.686 16.971 0l299.813-299.813c4.686-4.686 4.686-12.284 0-16.971l-11.314-11.314c-4.686-4.686-12.284-4.686-16.97 0z"/>
+						</svg>
+						<h1>2.2 Confirme o nome do remetente:</h1>
+
+
+						<h2>O nome que aparecerá nas caixas de entrada é:<span>Nome do remetente</span></h2>
+
+						<div class="mudar">
+							<h2>Deseja substituí-lo?<br>insira o nome abaixo e clique em mudar:</h2>
+							<input id="name" type="text" placeholder="NOME" size="35">
+							<button id="releaseBtn">MUDAR</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+			<button class="slide2ContinueBtn" id="slide2ContinueBtn">
+				<label for="slide2ContinueBtn">CONTINUE</label>
+				<svg id="slidesArrowRightContinueBtn" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 9.8 17" xml:space="preserve">
+					<path fill="#eee2df" d="M9.6,9l-7.8,7.7c-0.4,0.4-0.8,0.4-1.1,0l-0.5-0.5c-0.4-0.4-0.4-0.8,0-1.1L7,8.4L0.3,1.8
+					c-0.4-0.4-0.4-0.8,0-1.1l0.5-0.5c0.4-0.4,0.8-0.4,1.1,0l7.8,7.6C9.9,8.2,9.9,8.7,9.6,9z"/>
+				</svg>
+			</button>
+	</div>
+
+	<div class="slides" id="slide3">
+		<div class="titleSlides" id="SlideRefTree">
+			<div class="titlePassos">
+				<svg id="titlePassoSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+					<path fill="#eee2df" d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 464c-118.664 0-216-96.055-216-216 0-118.663 96.055-216 216-216 118.664 0 216 96.055 216 216 0 118.663-96.055 216-216 216zm141.63-274.961L217.15 376.071c-4.705 4.667-12.303 4.637-16.97-.068l-85.878-86.572c-4.667-4.705-4.637-12.303.068-16.97l8.52-8.451c4.705-4.667 12.303-4.637 16.97.068l68.976 69.533 163.441-162.13c4.705-4.667 12.303-4.637 16.97.068l8.451 8.52c4.668 4.705 4.637 12.303-.068 16.97z"/>
+				</svg>
+				<h1 class="passosSlide3">PASSO 3: DEFINA O MODO DE ENVIO</h1>
+			</div>
+			<div class="envio" style="box-sizing: border-box;">
+				<div class="grid-2fr-passo1">
+				<h1>3.1 Quando deve ser enviado?</h1>
+					<div class="envio-but1">
+						<div class="svg-check21">
+							<svg id="svg-check21" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+								<circle cx="64" cy="64" r="64" fill="#31af91"/>
+								<path fill="#fff" d="M54.3 97.2L24.8 67.7a1 1 0 0 1 0-1.4l8.5-8.5a1 1 0 0 1 1.4 0L55 78.1l38.2-38.2a1 1 0 0 1 1.4 0l8.5 8.5c.4.4.4 1 0 1.4L55.7 97.2a1 1 0 0 1-1.4 0z"/>
+							</svg>
+						</div>
+						<button class="but-imed" id="but-imed" onclick="imediatamente()">IMEDIATAMENTE</button>
+					</div>
+
+					<div class="envio-but2">
+						<div class="svg-check22">
+							<svg id="svg-check22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+								<circle cx="64" cy="64" r="64" fill="#31af91"/>
+								<path fill="#fff" d="M54.3 97.2L24.8 67.7a1 1 0 0 1 0-1.4l8.5-8.5a1 1 0 0 1 1.4 0L55 78.1l38.2-38.2a1 1 0 0 1 1.4 0l8.5 8.5c.4.4.4 1 0 1.4L55.7 97.2a1 1 0 0 1-1.4 0z"/>
+							</svg>
+						</div>
+						<button class="but-agendar" on="tap: lightbox.open" id="but-agendar" onclick="agendar()">
+							<span id="textAgendar">AGENDAR O ENVIO</span>
+							<span id="agendadoText">AGENDADO PARA</span>
+							<input type="text" name="deliverydate" id="dataAgendada">
+						</button>
+					</div>
+					<!-- clicando em AGENDAR ENVIO FUTURO abrir popup calendário -->
+				</div>
+				<!-- div do popup calendário -->
+				<div class="visib calendario-popup"></div>
+			</div>
+			<div class="ai">
+				<h1>Como deve ser feita a estratégia de entrega?</h1>
+				<div class="grid-3fr">
+					<div class="ai-title">
+						<svg id="robotSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+							<path fill="#eee2df" d="M160 416h64v-32h-64v32zm32-192c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32zm192 0c-17.7 0-32 14.3-32 32s14.3 32 32 32 32-14.3 32-32-14.3-32-32-32zm160 0h-32v-32c0-53-43-96-96-96H304V16c0-8.8-7.2-16-16-16s-16 7.2-16 16v80H160c-53 0-96 43-96 96v32H32c-17.7 0-32 14.3-32 32v128c0 17.7 14.3 32 32 32h32v32c0 35.3 28.7 64 64 64h320c35.3 0 64-28.7 64-64v-32h32c17.7 0 32-14.3 32-32V256c0-17.7-14.3-32-32-32zM64 384H32V256h32v128zm416 64c0 17.6-14.4 32-32 32H128c-17.6 0-32-14.4-32-32V192c0-35.3 28.7-64 64-64h256c35.3 0 64 28.7 64 64v256zm64-64h-32V256h32v128zm-192 32h64v-32h-64v32zm-96 0h64v-32h-64v32z"/>
+						</svg>
+						<h2>Robô Escolhe</h2>
+						<p class="text-legenda">Disponível para mailings de até 2.500 contatos</p>
+					</div>
+					<div class="ai-title">
+						<svg id="rabbitSvg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 827 674" xml:space="preserve">
+							<path fill="#eee2df" d="M784.4,343.7c-1-27.6-3-48.4-7.6-69c-12.4-56.1-39.2-104.2-79.2-145.1c-7.9-8.1-15.8-16.5-25-23c-15.2-10.8-30.8-21.1-47.2-29.7c-15.4-8.1-31.9-14.5-48.4-20c-13-4.4-26.8-6.6-40.3-9.4c-17.4-3.5-35.1-4.6-52.9-4.1c-25.7,0.8-50.9,4.4-75.7,11.6c-42,12.2-79.4,32.7-111.8,62c-10.7,9.7-20.8,20.1-30.5,30.9c-8.5,9.4-22.2,10.1-31,2.8c-8.9-7.3-9.8-21.6-1.9-31.1c18.7-22.5,40.3-41.9,64.3-58.6c20.5-14.4,42.3-26.5,65.4-35.8c14.4-5.8,29.4-10.4,44.4-14.2c14.4-3.6,29.2-5.7,43.9-8.1c24.2-4,48.6-3.4,72.8-1c18.7,1.9,37.5,5.5,55.7,10.3c43.5,11.6,83,31.7,118.5,59.5c35.9,28.1,64.8,62.2,87.1,102c12.9,23.2,23.1,47.5,29.9,73c4.2,15.9,6.5,32.3,9.4,48.5c3.3,18.5,3.3,37.3,2.3,56c-0.9,16.4-3,32.9-5.5,49.2c-3.1,20-9.1,39.4-16.3,58.2c-8,20.6-17.5,40.6-30,58.9c-9.3,13.6-19.2,26.8-29.4,39.8c-4.7,5.9-10.5,11-15.9,16.3c-6.8,6.7-13.2,14-20.7,19.9c-14.1,11.1-27.7,23.2-43.6,31.8c-13.1,7-26.8,13-39,21.3c-9.6,6.5-20.5,6.8-30.6,10.5c-11.6,4.3-23.8,7.2-35.9,10.1c-7.6,1.8-15.5,2.7-23.3,3.9c-20.7,3.3-41.6,3.1-62.4,2.6c-16-0.3-31.7-2.7-47.4-5.7c-21.8-4.1-43.1-10.4-63.6-18.8c-28.1-11.5-54.3-26.4-78.4-45c-23.5-18.1-44.2-39-62.2-62.6c-16.1-21.2-29.7-43.8-40.3-68.2c-1.1-2.6-1.9-5.4-3-8c-4.2-9.5,4-22.5,12.6-25.6c10.7-3.9,22.4,0.7,27.5,10.6c7.7,14.9,14.5,30.4,23.5,44.5c27.1,42.9,63.2,76.5,107.9,100.6c24.5,13.2,50.4,22.7,77.7,28.6c26.5,5.7,53.3,8,80.3,6.2c27.4-1.8,54.1-7.3,80-16.6c49.1-17.7,90.7-46.3,124.7-85.7c21.9-25.4,38.8-53.7,50.8-85c7-18.3,12.8-36.8,15.4-56.2C781.5,370.4,783.2,353.8,784.4,343.7z"/>
+							<path fill="#eee2df" d="M402,333.9c0-10.5,5.9-19.7,15.4-23.1c9-3.2,17.8-2,24.8,5.1c13.9,14.1,27.5,28.4,41.2,42.7c5.4,5.7,6.1,5.8,11.7,0.5c46.4-43.7,92.7-87.5,139.2-131.1c4-3.8,8.7-7.1,13.6-9.5c8.2-4,16.1-1.7,22.9,3.8c6.9,5.6,9.3,13.2,8.1,22c-0.9,6.7-4.7,11.6-9.4,16c-43.9,41.2-87.8,82.4-131.7,123.6c-14.5,13.6-29,27.3-43.6,40.9c-4.8,4.5-8.7,4.3-13.3-0.5c-18.1-18.8-36.1-37.6-54.3-56.3c-4.8-4.9-9.9-9.6-14.9-14.3C405.7,347.9,401.7,341.6,402,333.9z"/>
+							<path fill="#eee2df" d="M163.4,178.8c46.5,0,93.1,0,139.6,0c9.3,0,17,2.9,21,11.5c7,15.2-3.8,29.6-16.7,29.8c-10.1,0.2-20.1-0.1-30.2-0.1c-11.4,0-22.7,0.1-34.1,0.1c-73.8,0-147.5,0-221.3,0.1c-8.2,0-14.5-2.9-18.7-10c-8-13.6,0.7-30.2,16.5-31.3c4.6-0.3,9.2-0.1,13.8-0.1C76.7,178.8,120.1,178.8,163.4,178.8z"/>
+							<path fill="#eee2df" d="M182.6,277.8c40.3,0,80.7,0,121,0c8.9,0,15.9,3.1,20.4,11.2c5.5,9.9,0.6,24.6-10,28.5c-3.7,1.4-7.8,2.2-11.7,2.3c-42.4,0.2-84.7,0.2-127.1,0.2c-37.8,0-75.6,0-113.4-0.1c-15.4,0-24.9-11.4-22-26.5c1.7-9,10.1-15.5,20.6-15.5c19-0.1,38,0,57,0C139.1,277.8,160.8,277.8,182.6,277.8z"/>
+							<path fill="#eee2df" d="M206.4,377.2c32.8,0,65.7,0.2,98.5-0.1c12.7-0.1,23.7,10.4,20.6,25.8c-1.7,8.8-10.6,15.8-20,15.8c-30.5,0-61.1,0-91.6,0c-35.1,0-70.3-0.1-105.4,0.1c-13,0.1-24.9-9.9-21.7-26.3c1.5-7.6,8.7-14.9,17.2-15c18.1-0.3,36.3-0.2,54.4-0.2C174.5,377.1,190.4,377.2,206.4,377.2C206.4,377.2,206.4,377.2,206.4,377.2z"/>
+						</svg>
+
+						<h2>Normal</h2>
+						<p class="text-legenda">Disponível para todos mailings.</p>
+					</div>
+					<div class="ai-title">
+						<h2>Urgente</h2>
+						<svg id="rocketSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 511.9 512">
+							<path fill="#eee2df" d="M501.8 19.1c-1.1-4.4-4.5-7.8-8.8-8.8C453.7.7 442.5 0 408 0c-68.6 0-128.1 44.9-173.8 96H106.7c-11.4 0-21.9 6-27.6 15.9l-74.7 128C-8 261.2 7.4 288 32 288h82.7c-8.6 19.1-14.3 33.5-18.6 44.6-1.7 4.4-.7 9.5 2.7 12.8l67.7 67.7c3.4 3.4 8.4 4.4 12.8 2.7 11.2-4.3 25.5-10 44.6-18.6V480c0 24.7 26.8 40.1 48.1 27.6l128-74.7c9.8-5.7 15.9-16.3 15.9-27.6V277.8c51.1-45.7 96-105.2 96-173.8.1-34.5-.6-45.8-10.1-84.9zM32 256l74.7-128h101.1c-32.5 42.6-58.6 88.3-78.1 128H32zm224 224v-97.7c39.7-19.5 85.4-45.5 128-78.1v101.1L256 480zm-76.1-98.7l-49.1-49.1C177.6 215.9 283.8 32 408.1 32c24.7 0 37.3 0 65.5 6.5C480 66.7 480 79.2 480 104c0 124.3-184.1 230.5-300.1 277.3zM368 88c-30.9 0-56 25.1-56 56s25.1 56 56 56 56-25.1 56-56-25.1-56-56-56zm0 80c-13.2 0-24-10.8-24-24s10.8-24 24-24 24 10.8 24 24-10.8 24-24 24z"/>
+						</svg>
+						<p class="text-legenda">Disponível para mailings de até 500 contatos</p>
+					</div>
+				</div>
+				<div class="grid-3fr">
+					<button class="but-ai-1" id="but-ai-1" onclick="aiX()">
+						<div class="svg-check31">
+							<svg id="svg-check31" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+								<circle cx="64" cy="64" r="64" fill="#31af91"/>
+								<path fill="#fff" d="M54.3 97.2L24.8 67.7a1 1 0 0 1 0-1.4l8.5-8.5a1 1 0 0 1 1.4 0L55 78.1l38.2-38.2a1 1 0 0 1 1.4 0l8.5 8.5c.4.4.4 1 0 1.4L55.7 97.2a1 1 0 0 1-1.4 0z"/>
+							</svg>
+						</div>
+						<div class="but-ai-1-text">
+							<h3>+ Resultados</h3>
+							<p>Escolhe o melhor momento para a entrega de cada e-mail do mailing. Usando Inteligência Artificial, o sistema entrega o conteúdo no instante em que o destinatário estiver lendo e-mails. Nesta opção, o conteúdo não será distribuído de uma vez, mas sim no momento mais oportuno para gerar alta taxa de leitura, em até 48h. Ideal para divulgações sem urgência.</p>
+						</div>
+					</button>
+					<button class="but-ai-2" id="but-ai-2" onclick="aiY()">
+						<div class="svg-check32">
+							<svg id="svg-check32" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+								<circle cx="64" cy="64" r="64" fill="#31af91"/>
+								<path fill="#fff" d="M54.3 97.2L24.8 67.7a1 1 0 0 1 0-1.4l8.5-8.5a1 1 0 0 1 1.4 0L55 78.1l38.2-38.2a1 1 0 0 1 1.4 0l8.5 8.5c.4.4.4 1 0 1.4L55.7 97.2a1 1 0 0 1-1.4 0z"/>
+							</svg>
+						</div>
+						<div class="but-ai-2-text">
+							<h3>Entregas regulares</h3>
+							<p>É a rotina tradicional de envio de e-mails (a que sempre existiu) e segue uma lógica baseada no tamanho do mailing, a fim de evitar spam. Entrega o conteúdo no momento em que você clica em enviar, porém as retentativas de comunicação (no caso de caixa cheia, por exemplo) acontecem em intervalos médios. Ideal para mailings que possuem muitos contatos.</p>
+						</div>
+					</button>
+					<button class="but-ai-3" id="but-ai-3" onclick="aiZ()">
+						<div class="svg-check33">
+							<svg id="svg-check33" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+								<circle cx="64" cy="64" r="64" fill="#31af91"/>
+								<path fill="#fff" d="M54.3 97.2L24.8 67.7a1 1 0 0 1 0-1.4l8.5-8.5a1 1 0 0 1 1.4 0L55 78.1l38.2-38.2a1 1 0 0 1 1.4 0l8.5 8.5c.4.4.4 1 0 1.4L55.7 97.2a1 1 0 0 1-1.4 0z"/>
+							</svg>
+						</div>
+						<div class="but-ai-3-text">
+							<h3>+ Velocidade</h3>
+							<p>Entregas são realizadas o mais rápido possível. O mailing ganha prioridade de envio e as retentativas de comunicação (no caso de caixa cheia, por exemplo) acontecem em intervalos mais curtos. Tecnologia exclusiva, disponível somente para mailing com uma quantidade limitada de contatos. Ideal para quem precisa de urgência na divulgação.</p>
+						</div>
+					</button>
+					<!-- clicando em AGENDAR ENVIO FUTURO abrir popup calendário -->
+				</div>
+			</div>
+		</div>
+		<amp-lightbox id="lightbox" layout="nodisplay" class="datePicker" on="tap: lightbox.close">
+			<div>
+			<amp-date-picker id="static-picker"
+				onclick="console.dir(event);console.dir(this);"
+				type="single"
+				mode="static"
+				layout="fixed-height"
+				height="355"
+				locale="ptbr"
+				format="DD-MM-YYYY"
+				input-selector="[name=deliverydate]">
+			</amp-date-picker>
+		</div>
+	</amp-lightbox>
+			<button class="slide3ContinueBtn" id="slide3ContinueBtn">
+				<label for="slide3ContinueBtn">CONTINUE</label>
+				<svg id="slidesArrowRightContinueBtn" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 9.8 17" xml:space="preserve">
+					<path fill="#eee2df" d="M9.6,9l-7.8,7.7c-0.4,0.4-0.8,0.4-1.1,0l-0.5-0.5c-0.4-0.4-0.4-0.8,0-1.1L7,8.4L0.3,1.8
+					c-0.4-0.4-0.4-0.8,0-1.1l0.5-0.5c0.4-0.4,0.8-0.4,1.1,0l7.8,7.6C9.9,8.2,9.9,8.7,9.6,9z"/>
+				</svg>
+			</button>
+	</div>
+
+	<div class="slides" id="slide4">
+		<div class="titleSlides" id="SlideRefFour">
+			<div class="titlePassos">
+				<svg id="titlePassoSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+					<path fill="#eee2df" d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 464c-118.664 0-216-96.055-216-216 0-118.663 96.055-216 216-216 118.664 0 216 96.055 216 216 0 118.663-96.055 216-216 216zm141.63-274.961L217.15 376.071c-4.705 4.667-12.303 4.637-16.97-.068l-85.878-86.572c-4.667-4.705-4.637-12.303.068-16.97l8.52-8.451c4.705-4.667 12.303-4.637 16.97.068l68.976 69.533 163.441-162.13c4.705-4.667 12.303-4.637 16.97.068l8.451 8.52c4.668 4.705 4.637 12.303-.068 16.97z"/>
+				</svg>
+				<h1 class="passosSlide4">PASSO 4: QUANDO PARAR A ENTREGA?</h1>
+			</div>
+			
+					<div class="envio">
+
+
+			<p class="stop">Função para pré-determinar o tempo total para seguir entregando um release. O padrão é 48h.<br>Caso queira, é possível diminuir o tempo padrão de entrega de acordo com suas necessidades. Ex: um disparo feito hoje (às 10h) para divulgar um evento no mesmo dia (às 18h). Se o usuário escolher a opção 12h, o sistema entregará os releases até 22h deste mesmo dia (10h + 12h). Depois das 22h, cessará as tentativas.<br>Vantagem: evitar que profissionais que estejam com caixa cheia, entre outros, recebam divulgações (releases, convites) desatualizadas.</p>
+
+			<h1>ESCOLHA O TEMPO PADRÃO DE ENTREGA:</h1>
+
+			<div class="check-fim-container">
+				<div class="check-fim">
+					<div class="check1">
+						<div class="svg-checkTime" id="Btn4hrs">
+							<svg id="svg-checkTime" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+								<circle cx="64" cy="64" r="64" fill="#31af91"/>
+								<path fill="#fff" d="M54.3 97.2L24.8 67.7a1 1 0 0 1 0-1.4l8.5-8.5a1 1 0 0 1 1.4 0L55 78.1l38.2-38.2a1 1 0 0 1 1.4 0l8.5 8.5c.4.4.4 1 0 1.4L55.7 97.2a1 1 0 0 1-1.4 0z"/>
+							</svg>
+						</div>
+						<svg id="stopWatchSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+							<path fill="#eee2df" d="M393.3 141.3l17.5-17.5c4.7-4.7 4.7-12.3 0-17l-5.7-5.7c-4.7-4.7-12.3-4.7-17 0l-17.5 17.5c-35.8-31-81.5-50.9-131.7-54.2V32h25c6.6 0 12-5.4 12-12v-8c0-6.6-5.4-12-12-12h-80c-6.6 0-12 5.4-12 12v8c0 6.6 5.4 12 12 12h23v32.6C91.2 73.3 0 170 0 288c0 123.7 100.3 224 224 224s224-100.3 224-224c0-56.1-20.6-107.4-54.7-146.7zM224 480c-106.1 0-192-85.9-192-192S117.9 96 224 96s192 85.9 192 192-85.9 192-192 192zm4-128h-8c-6.6 0-12-5.4-12-12V172c0-6.6 5.4-12 12-12h8c6.6 0 12 5.4 12 12v168c0 6.6-5.4 12-12 12z"/>
+						</svg>
+<!-- 						<input type="radio" id="FimChoice1"
+						name="horas-fim" value="email"> -->
+						<label for="FimChoice1">4 Horas</label>
+					</div>
+					<div class="check2">
+						<div class="svg-checkTime" id="Btn6hrs">
+							<svg id="svg-checkTime" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+								<circle cx="64" cy="64" r="64" fill="#31af91"/>
+								<path fill="#fff" d="M54.3 97.2L24.8 67.7a1 1 0 0 1 0-1.4l8.5-8.5a1 1 0 0 1 1.4 0L55 78.1l38.2-38.2a1 1 0 0 1 1.4 0l8.5 8.5c.4.4.4 1 0 1.4L55.7 97.2a1 1 0 0 1-1.4 0z"/>
+							</svg>
+						</div>
+						<svg id="stopWatchSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+							<path fill="#eee2df" d="M393.3 141.3l17.5-17.5c4.7-4.7 4.7-12.3 0-17l-5.7-5.7c-4.7-4.7-12.3-4.7-17 0l-17.5 17.5c-35.8-31-81.5-50.9-131.7-54.2V32h25c6.6 0 12-5.4 12-12v-8c0-6.6-5.4-12-12-12h-80c-6.6 0-12 5.4-12 12v8c0 6.6 5.4 12 12 12h23v32.6C91.2 73.3 0 170 0 288c0 123.7 100.3 224 224 224s224-100.3 224-224c0-56.1-20.6-107.4-54.7-146.7zM224 480c-106.1 0-192-85.9-192-192S117.9 96 224 96s192 85.9 192 192-85.9 192-192 192zm4-128h-8c-6.6 0-12-5.4-12-12V172c0-6.6 5.4-12 12-12h8c6.6 0 12 5.4 12 12v168c0 6.6-5.4 12-12 12z"/>
+						</svg>
+<!-- 						<input type="radio" id="FimChoice2"
+						name="horas-fim" value="email"> -->
+						<label for="FimChoice2">6 Horas</label>
+					</div>
+					<div class="check3">
+						<div class="svg-checkTime" id="Btn8hrs">
+							<svg id="svg-checkTime" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+								<circle cx="64" cy="64" r="64" fill="#31af91"/>
+								<path fill="#fff" d="M54.3 97.2L24.8 67.7a1 1 0 0 1 0-1.4l8.5-8.5a1 1 0 0 1 1.4 0L55 78.1l38.2-38.2a1 1 0 0 1 1.4 0l8.5 8.5c.4.4.4 1 0 1.4L55.7 97.2a1 1 0 0 1-1.4 0z"/>
+							</svg>
+						</div>
+						<svg id="stopWatchSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+							<path fill="#eee2df" d="M393.3 141.3l17.5-17.5c4.7-4.7 4.7-12.3 0-17l-5.7-5.7c-4.7-4.7-12.3-4.7-17 0l-17.5 17.5c-35.8-31-81.5-50.9-131.7-54.2V32h25c6.6 0 12-5.4 12-12v-8c0-6.6-5.4-12-12-12h-80c-6.6 0-12 5.4-12 12v8c0 6.6 5.4 12 12 12h23v32.6C91.2 73.3 0 170 0 288c0 123.7 100.3 224 224 224s224-100.3 224-224c0-56.1-20.6-107.4-54.7-146.7zM224 480c-106.1 0-192-85.9-192-192S117.9 96 224 96s192 85.9 192 192-85.9 192-192 192zm4-128h-8c-6.6 0-12-5.4-12-12V172c0-6.6 5.4-12 12-12h8c6.6 0 12 5.4 12 12v168c0 6.6-5.4 12-12 12z"/>
+						</svg>
+<!-- 						<input type="radio" id="FimChoice3"
+						name="horas-fim" value="email"> -->
+						<label for="FimChoice3">8 Horas</label>
+					</div>
+					<div class="check4">
+						<div class="svg-checkTime" id="Btn12hrs">
+							<svg id="svg-checkTime" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+								<circle cx="64" cy="64" r="64" fill="#31af91"/>
+								<path fill="#fff" d="M54.3 97.2L24.8 67.7a1 1 0 0 1 0-1.4l8.5-8.5a1 1 0 0 1 1.4 0L55 78.1l38.2-38.2a1 1 0 0 1 1.4 0l8.5 8.5c.4.4.4 1 0 1.4L55.7 97.2a1 1 0 0 1-1.4 0z"/>
+							</svg>
+						</div>
+						<svg id="stopWatchSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+							<path fill="#eee2df" d="M393.3 141.3l17.5-17.5c4.7-4.7 4.7-12.3 0-17l-5.7-5.7c-4.7-4.7-12.3-4.7-17 0l-17.5 17.5c-35.8-31-81.5-50.9-131.7-54.2V32h25c6.6 0 12-5.4 12-12v-8c0-6.6-5.4-12-12-12h-80c-6.6 0-12 5.4-12 12v8c0 6.6 5.4 12 12 12h23v32.6C91.2 73.3 0 170 0 288c0 123.7 100.3 224 224 224s224-100.3 224-224c0-56.1-20.6-107.4-54.7-146.7zM224 480c-106.1 0-192-85.9-192-192S117.9 96 224 96s192 85.9 192 192-85.9 192-192 192zm4-128h-8c-6.6 0-12-5.4-12-12V172c0-6.6 5.4-12 12-12h8c6.6 0 12 5.4 12 12v168c0 6.6-5.4 12-12 12z"/>
+						</svg>
+<!-- 						<input type="radio" id="FimChoice4"
+						name="horas-fim" value="email"> -->
+						<label for="FimChoice4">12 Horas</label>
+					</div>
+					<div class="check5">
+						<div class="svg-checkTime" id="Btn18hrs">
+							<svg id="svg-checkTime" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+								<circle cx="64" cy="64" r="64" fill="#31af91"/>
+								<path fill="#fff" d="M54.3 97.2L24.8 67.7a1 1 0 0 1 0-1.4l8.5-8.5a1 1 0 0 1 1.4 0L55 78.1l38.2-38.2a1 1 0 0 1 1.4 0l8.5 8.5c.4.4.4 1 0 1.4L55.7 97.2a1 1 0 0 1-1.4 0z"/>
+							</svg>
+						</div>
+						<svg id="stopWatchSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+							<path fill="#eee2df" d="M393.3 141.3l17.5-17.5c4.7-4.7 4.7-12.3 0-17l-5.7-5.7c-4.7-4.7-12.3-4.7-17 0l-17.5 17.5c-35.8-31-81.5-50.9-131.7-54.2V32h25c6.6 0 12-5.4 12-12v-8c0-6.6-5.4-12-12-12h-80c-6.6 0-12 5.4-12 12v8c0 6.6 5.4 12 12 12h23v32.6C91.2 73.3 0 170 0 288c0 123.7 100.3 224 224 224s224-100.3 224-224c0-56.1-20.6-107.4-54.7-146.7zM224 480c-106.1 0-192-85.9-192-192S117.9 96 224 96s192 85.9 192 192-85.9 192-192 192zm4-128h-8c-6.6 0-12-5.4-12-12V172c0-6.6 5.4-12 12-12h8c6.6 0 12 5.4 12 12v168c0 6.6-5.4 12-12 12z"/>
+						</svg>
+<!-- 						<input type="radio" id="FimChoice5"
+						name="horas-fim" value="email"> -->
+						<label for="FimChoice5">18 Horas</label>
+					</div>
+					<div class="check6">
+						<div class="svg-checkTime" id="Btn24hrs">
+							<svg id="svg-checkTime" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+								<circle cx="64" cy="64" r="64" fill="#31af91"/>
+								<path fill="#fff" d="M54.3 97.2L24.8 67.7a1 1 0 0 1 0-1.4l8.5-8.5a1 1 0 0 1 1.4 0L55 78.1l38.2-38.2a1 1 0 0 1 1.4 0l8.5 8.5c.4.4.4 1 0 1.4L55.7 97.2a1 1 0 0 1-1.4 0z"/>
+							</svg>
+						</div>
+						<svg id="stopWatchSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+							<path fill="#eee2df" d="M393.3 141.3l17.5-17.5c4.7-4.7 4.7-12.3 0-17l-5.7-5.7c-4.7-4.7-12.3-4.7-17 0l-17.5 17.5c-35.8-31-81.5-50.9-131.7-54.2V32h25c6.6 0 12-5.4 12-12v-8c0-6.6-5.4-12-12-12h-80c-6.6 0-12 5.4-12 12v8c0 6.6 5.4 12 12 12h23v32.6C91.2 73.3 0 170 0 288c0 123.7 100.3 224 224 224s224-100.3 224-224c0-56.1-20.6-107.4-54.7-146.7zM224 480c-106.1 0-192-85.9-192-192S117.9 96 224 96s192 85.9 192 192-85.9 192-192 192zm4-128h-8c-6.6 0-12-5.4-12-12V172c0-6.6 5.4-12 12-12h8c6.6 0 12 5.4 12 12v168c0 6.6-5.4 12-12 12z"/>
+						</svg>
+<!-- 						<input type="radio" id="FimChoice6"
+						name="horas-fim" value="email"> -->
+						<label for="FimChoice6">24 Horas</label>
+					</div>
+					<div class="check7">
+						<div class="svg-checkTime" id="Btn48hrs">
+							<svg id="svg-checkTime" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+								<circle cx="64" cy="64" r="64" fill="#31af91"/>
+								<path fill="#fff" d="M54.3 97.2L24.8 67.7a1 1 0 0 1 0-1.4l8.5-8.5a1 1 0 0 1 1.4 0L55 78.1l38.2-38.2a1 1 0 0 1 1.4 0l8.5 8.5c.4.4.4 1 0 1.4L55.7 97.2a1 1 0 0 1-1.4 0z"/>
+							</svg>
+						</div>
+						<svg id="stopWatchSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+							<path fill="#eee2df" d="M393.3 141.3l17.5-17.5c4.7-4.7 4.7-12.3 0-17l-5.7-5.7c-4.7-4.7-12.3-4.7-17 0l-17.5 17.5c-35.8-31-81.5-50.9-131.7-54.2V32h25c6.6 0 12-5.4 12-12v-8c0-6.6-5.4-12-12-12h-80c-6.6 0-12 5.4-12 12v8c0 6.6 5.4 12 12 12h23v32.6C91.2 73.3 0 170 0 288c0 123.7 100.3 224 224 224s224-100.3 224-224c0-56.1-20.6-107.4-54.7-146.7zM224 480c-106.1 0-192-85.9-192-192S117.9 96 224 96s192 85.9 192 192-85.9 192-192 192zm4-128h-8c-6.6 0-12-5.4-12-12V172c0-6.6 5.4-12 12-12h8c6.6 0 12 5.4 12 12v168c0 6.6-5.4 12-12 12z"/>
+						</svg>
+<!-- 						<input type="radio" id="FimChoice6"
+						name="horas-fim" value="email" checked> -->
+						<label for="FimChoice7">48 Horas</label>
+					</div>
+				</div>
+			</div>
+
+			
+		</div>
+		</div>
+			<button class="slide4ContinueBtn" id="slide4ContinueBtn">
+				<label for="slide4ContinueBtn">CONTINUE</label>
+				<svg id="slidesArrowRightContinueBtn" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 9.8 17" xml:space="preserve">
+					<path fill="#eee2df" d="M9.6,9l-7.8,7.7c-0.4,0.4-0.8,0.4-1.1,0l-0.5-0.5c-0.4-0.4-0.4-0.8,0-1.1L7,8.4L0.3,1.8
+					c-0.4-0.4-0.4-0.8,0-1.1l0.5-0.5c0.4-0.4,0.8-0.4,1.1,0l7.8,7.6C9.9,8.2,9.9,8.7,9.6,9z"/>
+				</svg>
+			</button>
+	</div>
+	<div class="slides" id="slide5">
+		<div class="titleSlides" id="SlideRefFive">
+			
+			<div class="titlePassos">
+				<svg id="titlePassoSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+					<path fill="#eee2df" d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 464c-118.664 0-216-96.055-216-216 0-118.663 96.055-216 216-216 118.664 0 216 96.055 216 216 0 118.663-96.055 216-216 216zm141.63-274.961L217.15 376.071c-4.705 4.667-12.303 4.637-16.97-.068l-85.878-86.572c-4.667-4.705-4.637-12.303.068-16.97l8.52-8.451c4.705-4.667 12.303-4.637 16.97.068l68.976 69.533 163.441-162.13c4.705-4.667 12.303-4.637 16.97.068l8.451 8.52c4.668 4.705 4.637 12.303-.068 16.97z"/>
+				</svg>
+				<h1 class="passosSlide5">PASSO 5: REVISAR E ENVIAR</h1>
+			</div>
+
+		<div class="envio" id="recibo">
+			<span id="reciboTitle">CONFIRME SE OS CAMPOS FORAM PREENCHIDOS CORRETAMENTE:</span>
+			<div class="reciboBloco">
+				<svg id="reciboReleaseSvg" class="reciboSvgIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+					<path fill="#eee2df" d="M369.941 97.941l-83.882-83.882A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v416c0 26.51 21.49 48 48 48h288c26.51 0 48-21.49 48-48V131.882a48 48 0 0 0-14.059-33.941zm-22.627 22.628a15.89 15.89 0 0 1 4.195 7.431H256V32.491a15.88 15.88 0 0 1 7.431 4.195l83.883 83.883zM336 480H48c-8.837 0-16-7.163-16-16V48c0-8.837 7.163-16 16-16h176v104c0 13.255 10.745 24 24 24h104v304c0 8.837-7.163 16-16 16zm-34.467-210.949l-134.791 133.71c-4.7 4.663-12.288 4.642-16.963-.046l-67.358-67.552c-4.683-4.697-4.672-12.301.024-16.985l8.505-8.48c4.697-4.683 12.301-4.672 16.984.024l50.442 50.587 117.782-116.837c4.709-4.671 12.313-4.641 16.985.068l8.458 8.527c4.672 4.709 4.641 12.313-.068 16.984z"/>
+				</svg>			
+				<div class="blocoConfirm">
+					<span id="reciboSubtitle">Assunto do release:</span>
+					<span id="reciboData">ASSUNTO</span>
+				</div>
+				<div class="blocoConfirm">
+					<span id="reciboSubtitle">Total de e-mails selecionados:</span>
+					<span id="reciboData">999</span>
+				</div>
+			</div>
+			<div class="reciboBloco">
+				<svg id="reciboEmailSvg" class="reciboSvgIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+					<path fill="#eee2df" d="M512 32H64C28.7 32 0 60.7 0 96v320c0 35.3 28.7 64 64 64h448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64zm32 384c0 17.6-14.4 32-32 32H64c-17.6 0-32-14.4-32-32V96c0-17.6 14.4-32 32-32h448c17.6 0 32 14.4 32 32v320zm-72-128H360c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h112c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8zm0-64H360c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h112c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8zm0-64H360c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h112c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8zM208 288c44.2 0 80-35.8 80-80s-35.8-80-80-80-80 35.8-80 80 35.8 80 80 80zm0-128c26.5 0 48 21.5 48 48s-21.5 48-48 48-48-21.5-48-48 21.5-48 48-48zm46.8 144c-19.5 0-24.4 7-46.8 7s-27.3-7-46.8-7c-21.2 0-41.8 9.4-53.8 27.4C100.2 342.1 96 355 96 368.9V392c0 4.4 3.6 8 8 8h16c4.4 0 8-3.6 8-8v-23.1c0-7 2.1-13.8 6-19.6 5.6-8.3 15.8-13.2 27.3-13.2 12.4 0 20.8 7 46.8 7 25.9 0 34.3-7 46.8-7 11.5 0 21.7 5 27.3 13.2 3.9 5.8 6 12.6 6 19.6V392c0 4.4 3.6 8 8 8h16c4.4 0 8-3.6 8-8v-23.1c0-13.9-4.2-26.8-11.4-37.5-12.3-18-32.9-27.4-54-27.4z"/>
+				</svg>
+				<div class="blocoConfirm">
+					<span id="reciboSubtitle">e-mails do rementente:</span>
+					<span id="reciboData">e-mail@e-mail.com</span>
+				</div>
+				<div class="blocoConfirm">
+					<span id="reciboSubtitle">Nome do remetente:</span>
+					<span id="reciboData">Nome do remetente</span>
+				</div>
+			</div>
+			<div class="reciboBloco">
+				<svg id="reciboTimeSvg" class="reciboSvgIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+					<path fill="#eee2df" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm216 248c0 118.7-96.1 216-216 216-118.7 0-216-96.1-216-216 0-118.7 96.1-216 216-216 118.7 0 216 96.1 216 216zm-148.9 88.3l-81.2-59c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h14c6.6 0 12 5.4 12 12v146.3l70.5 51.3c5.4 3.9 6.5 11.4 2.6 16.8l-8.2 11.3c-3.9 5.3-11.4 6.5-16.8 2.6z"/>
+				</svg>
+				<div class="blocoConfirm">
+					<span id="reciboSubtitle">Quando deve ser enviado?</span>
+					<span id="reciboData">Imediatamente</span>
+				</div>
+				<div class="blocoConfirm">
+					<span id="reciboSubtitle">Estratégia de entrega</span>
+					<span id="reciboData">+ Velocidade</span>
+				</div>
+			</div>
+			<div class="reciboBloco reciboBlocoFull">
+				<div class="blocoConfirm">
+					<span id="reciboSubtitle">Tempo padrão de entrega:</span>
+					<span id="reciboData1">12 horas</span>
+				</div>
+			</div>
+			<p class="reciboText">Tem certeza que escolheu todos os campos corretamente? Clique no botão "enviar" para finalizar.</p>
+
+			<button class="gerarPdfBtn">
+				<svg id="pdfFileSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+				<path fill="#eee2df" d="M369.9 97.9L286 14C277 5 264.8-.1 252.1-.1H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V131.9c0-12.7-5.1-25-14.1-34zm-22.6 22.7c2.1 2.1 3.5 4.6 4.2 7.4H256V32.5c2.8.7 5.3 2.1 7.4 4.2l83.9 83.9zM336 480H48c-8.8 0-16-7.2-16-16V48c0-8.8 7.2-16 16-16h176v104c0 13.3 10.7 24 24 24h104v304c0 8.8-7.2 16-16 16zm-22-171.2c-13.5-13.3-55-9.2-73.7-6.7-21.2-12.8-35.2-30.4-45.1-56.6 4.3-18 12-47.2 6.4-64.9-4.4-28.1-39.7-24.7-44.6-6.8-5 18.3-.3 44.4 8.4 77.8-11.9 28.4-29.7 66.9-42.1 88.6-20.8 10.7-54.1 29.3-58.8 52.4-3.5 16.8 22.9 39.4 53.1 6.4 9.1-9.9 19.3-24.8 31.3-45.5 26.7-8.8 56.1-19.8 82-24 21.9 12 47.6 19.9 64.6 19.9 27.7.1 28.9-30.2 18.5-40.6zm-229.2 89c5.9-15.9 28.6-34.4 35.5-40.8-22.1 35.3-35.5 41.5-35.5 40.8zM180 175.5c8.7 0 7.8 37.5 2.1 47.6-5.2-16.3-5-47.6-2.1-47.6zm-28.4 159.3c11.3-19.8 21-43.2 28.8-63.7 9.7 17.7 22.1 31.7 35.1 41.5-24.3 4.7-45.4 15.1-63.9 22.2zm153.4-5.9s-5.8 7-43.5-9.1c41-3 47.7 6.4 43.5 9.1z"/>
+			</svg>
+			<span>GERAR PDF</span>
+			</button>
+
+		</div>
+
+		<div class="envio">
+
+
+
+		<div class="enviar">
+			<button class="but-enviar" href="#">ENVIAR</button>
+		</div>
+
+
+			
+		</div>
+
+		</div>
+		<div class="enviarConfirmarModal">
+			<div class="ConfirmarBox">
+			    <svg id="alertMsgIcon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 44.2 38.7" xml:space="preserve">
+			      <path fill="#eee2df" d="M22.1,2.8C11.4,2.8,2.8,9.6,2.8,17.9s8.7,15.2,19.3,15.2c2.4,0,4.9-0.4,7.2-1.1l1.3-0.4l1.1,0.8c2,1.4,5,3,8.9,3.4c-1-1.3-2.6-3.5-3.5-6l-0.6-1.6l1.2-1.3c2.5-2.6,3.8-5.8,3.8-9C41.4,9.6,32.7,2.8,22.1,2.8 M22.1,0c12.2,0,22.1,8,22.1,17.9c0,4.1-1.7,7.9-4.6,10.9c1.3,3.4,4,6.3,4,6.3c0.6,0.6,0.7,1.5,0.4,2.2c-0.3,0.8-1.1,1.3-1.9,1.3c-5.3,0-9.5-2.2-12-4c-2.5,0.8-5.2,1.2-8,1.2C9.9,35.9,0,27.9,0,17.9S9.9,0,22.1,0z"/>
+			      <path fill="#eee2df" d="M19.1,27.1c0-0.8,0.3-1.4,0.8-1.9c0.6-0.5,1.3-0.7,2.1-0.7c0.8,0,1.5,0.2,2.1,0.7c0.6,0.5,0.8,1.1,0.8,1.9c0,0.8-0.3,1.4-0.8,1.9c-0.6,0.5-1.3,0.7-2.1,0.7c-0.8,0-1.5-0.2-2.1-0.7C19.4,28.5,19.1,27.8,19.1,27.1z M24.3,22.2H20L19.3,6.5H25L24.3,22.2z"/>
+			    </svg>
+				<span>Deseja mesmo enviar agora?</span>
+				<button id="ConfirmarBoxSim">SIM</button>
+				<button id="ConfirmarBoxNao">NÃO</button>
+			</div>
+		</div>
+
+		<div class="finalConfirmModal">
+			<div class="finalConfirmBox bounceInDown">
+				<svg id="finalConfirmSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+					<path fill="#1f8a70" d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 464c-118.664 0-216-96.055-216-216 0-118.663 96.055-216 216-216 118.664 0 216 96.055 216 216 0 118.663-96.055 216-216 216zm141.63-274.961L217.15 376.071c-4.705 4.667-12.303 4.637-16.97-.068l-85.878-86.572c-4.667-4.705-4.637-12.303.068-16.97l8.52-8.451c4.705-4.667 12.303-4.637 16.97.068l68.976 69.533 163.441-162.13c4.705-4.667 12.303-4.637 16.97.068l8.451 8.52c4.668 4.705 4.637 12.303-.068 16.97z"/>
+				</svg>
+				<span id="finalConfirmText">Procedimento finalizado com êxito!</span>
+
+			</div>
+		</div>
+	</div>
+	<div class="slides" id="slide6">
+		<div class="titleSlides" id="SlideRefSix">Title</div>
+	</div>
+</div>
+</div>
+
+
+
+	</div>
+	<!-- final div container -->
+
+</div>
+
+
+<script src="js\confirmacao-step-form.js"></script>
+
+</body>
+</html>
